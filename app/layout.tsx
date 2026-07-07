@@ -14,8 +14,8 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   title: {
-    default: "Radhika Collection | Suits, Sarees, Lehenga & Ready-made Dresses",
-    template: "%s | Radhika Collection",
+    default: "Shibrah Collection | Suits, Sarees, Lehenga & Ready-made Dresses",
+    template: "%s | Shibrah Collection",
   },
   description:
     "Shop premium ethnic wear — suits, sarees, lehengas and ready-made dresses crafted for every occasion. Fast shipping, easy returns.",

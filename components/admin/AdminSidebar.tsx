@@ -17,7 +17,7 @@ export function AdminSidebar() {
   return (
     <aside className="flex w-64 shrink-0 flex-col bg-navy-900 px-4 py-6 text-navy-100">
       <div className="mb-8 px-2 font-display text-xl font-bold text-white">
-        Radhika<span className="text-gold-400">Admin</span>
+        Shibrah<span className="text-gold-400">Admin</span>
       </div>
       <nav className="flex flex-1 flex-col gap-1">
         {NAV_ITEMS.map((item) => {

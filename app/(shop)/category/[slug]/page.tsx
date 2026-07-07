@@ -20,7 +20,7 @@ export async function generateMetadata({
   if (!category) return {};
   return {
     title: category === "Ready-made Dress" ? "Ready-made Dresses" : `${category}s`,
-    description: `Shop premium ${category.toLowerCase()}s at Radhika Collection — fast shipping, easy returns.`,
+    description: `Shop premium ${category.toLowerCase()}s at Shibrah Collection — fast shipping, easy returns.`,
   };
 }
 

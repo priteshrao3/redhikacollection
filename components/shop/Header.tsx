@@ -41,7 +41,7 @@ export function Header() {
         </button>
 
         <Link href="/" className="flex shrink-0 flex-col leading-none">
-          <span className="font-display text-2xl font-bold text-maroon-700">Radhika</span>
+          <span className="font-display text-2xl font-bold text-maroon-700">Shibrah</span>
           <span className="mt-0.5 text-[10px] font-semibold tracking-[0.35em] text-gold-600">
             COLLECTION
           </span>

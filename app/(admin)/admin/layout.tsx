@@ -3,7 +3,7 @@ import { AdminSidebar } from "@/components/admin/AdminSidebar";
 import { ToastHost } from "@/components/shop/Toast";
 
 export const metadata: Metadata = {
-  title: { default: "Admin", template: "%s | Radhika Collection Admin" },
+  title: { default: "Admin", template: "%s | Shibrah Collection Admin" },
 };
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {

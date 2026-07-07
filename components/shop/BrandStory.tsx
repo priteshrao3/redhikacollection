@@ -12,7 +12,7 @@ export function BrandStory() {
         <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-neutral-100 sm:aspect-[16/10] lg:aspect-[4/5]">
           <Image
             src={image}
-            alt="Radhika Collection craftsmanship"
+            alt="Shibrah Collection craftsmanship"
             fill
             sizes="(max-width: 1024px) 100vw, 50vw"
             className="object-cover"
@@ -32,7 +32,7 @@ export function BrandStory() {
             }
           />
           <p className="mt-5 text-neutral-600">
-            Radhika Collection began with a simple idea — every woman deserves ethnic wear
+            Shibrah Collection began with a simple idea — every woman deserves ethnic wear
             that feels as good as it looks. From hand-picked Banarasi weaves to
             contemporary Indo-western silhouettes, each piece in our collection is chosen
             for its craftsmanship, fabric quality, and finish.

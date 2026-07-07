@@ -40,7 +40,7 @@ export function Footer() {
     <footer className="mt-16 border-t border-neutral-200 bg-navy-900 text-neutral-300">
       <div className="mx-auto grid max-w-[1800px] grid-cols-2 gap-8 px-3 py-12 sm:px-4 md:grid-cols-4 lg:px-6">
         <div className="col-span-2 md:col-span-1">
-          <div className="font-display text-xl font-bold text-white">Radhika Collection</div>
+          <div className="font-display text-xl font-bold text-white">Shibrah Collection</div>
           <p className="mt-3 text-sm text-neutral-400">
             Premium ethnic wear crafted for every occasion — suits, sarees, lehengas
             and ready-made dresses.
@@ -84,14 +84,14 @@ export function Footer() {
         <div>
           <h4 className="mb-3 text-sm font-semibold text-white">Contact</h4>
           <ul className="space-y-2 text-sm">
-            <li>support@radhikacollection.example</li>
+            <li>support@shibrahcollection.example</li>
             <li>+91 98765 43210</li>
             <li>Mon-Sat, 10am - 7pm IST</li>
           </ul>
         </div>
       </div>
       <div className="border-t border-white/10 px-4 py-4 text-center text-xs text-neutral-500">
-        © {new Date().getFullYear()} Radhika Collection. All rights reserved. (Prototype — demo data only)
+        © {new Date().getFullYear()} Shibrah Collection. All rights reserved. (Prototype — demo data only)
       </div>
     </footer>
   );

@@ -19,6 +19,7 @@ export function FilterSidebar({
   colorOptions,
   filters,
   onChange,
+  className,
 }: {
   activeCategory: CategoryName;
   priceCeiling: number;
@@ -26,9 +27,10 @@ export function FilterSidebar({
   colorOptions: string[];
   filters: FilterState;
   onChange: (filters: FilterState) => void;
+  className?: string;
 }) {
   return (
-    <aside className="w-full shrink-0 space-y-6 lg:w-56">
+    <aside className={cn("w-full shrink-0 space-y-6 lg:w-56", className)}>
       <div>
         <h3 className="mb-3 text-sm font-semibold text-navy-900">Category</h3>
         <ul className="space-y-2">

@@ -29,6 +29,7 @@ export function Header() {
     const q = query.trim();
     if (!q) return;
     router.push(`/search?q=${encodeURIComponent(q)}`);
+    setMobileOpen(false);
   }
 
   return (
@@ -105,6 +106,21 @@ export function Header() {
 
       {mobileOpen && (
         <nav className="flex flex-col gap-1 border-t border-neutral-200 px-4 py-3 lg:hidden">
+          <form
+            onSubmit={handleSearch}
+            className="mb-2 flex items-center rounded-full border border-neutral-300 px-3 py-1.5 sm:hidden"
+          >
+            <button type="submit" aria-label="Search" className="text-neutral-400 hover:text-maroon-600">
+              <Search size={16} />
+            </button>
+            <input
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search for products, categories..."
+              className="ml-2 w-full bg-transparent text-sm outline-none placeholder:text-neutral-400"
+            />
+          </form>
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}

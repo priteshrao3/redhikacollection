@@ -55,7 +55,7 @@ export default async function ProductPage({
         ]}
       />
 
-      <div className="mt-6 grid grid-cols-1 gap-10 lg:grid-cols-[1.1fr_1fr_0.7fr]">
+      <div className="mt-6 grid grid-cols-1 gap-10 lg:grid-cols-2 xl:grid-cols-[1.1fr_1fr_0.7fr]">
         <ImageGallery images={product.images} alt={product.name} />
 
         <div>
@@ -73,7 +73,7 @@ export default async function ProductPage({
           <AddToCartActions product={product} />
         </div>
 
-        <div className="space-y-5">
+        <div className="space-y-5 lg:col-span-2 xl:col-span-1">
           <div>
             <h3 className="mb-2 text-sm font-semibold text-navy-900">Product Highlights</h3>
             <ul className="space-y-1.5">

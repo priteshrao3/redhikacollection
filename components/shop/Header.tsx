@@ -14,9 +14,9 @@ const NAV_LINKS = [
 ];
 
 const OFFERS = [
-  "Free Shipping on Orders Above ₹999",
+  "Free Shipping on Orders Above ₹6999",
   "Flat 25% Off on Wedding Collection",
-  "Easy 15-Day Returns | COD Available",
+  "Easy 7-Day Returns | COD Not Available",
 ];
 
 export function Header() {

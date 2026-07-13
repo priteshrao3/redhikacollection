@@ -12,9 +12,9 @@ export function ChartCard({
   className?: string;
 }) {
   return (
-    <div className={cn("rounded-xl border border-navy-800/10 bg-white p-5 shadow-sm", className)}>
+    <div className={cn("rounded-xl border border-neutral-200 bg-white p-5 shadow-sm", className)}>
       <div className="mb-4 flex items-center justify-between">
-        <h2 className="text-sm font-semibold text-navy-900">{title}</h2>
+        <h2 className="font-display text-sm font-semibold text-navy-900">{title}</h2>
         {action}
       </div>
       {children}

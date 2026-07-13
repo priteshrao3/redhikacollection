@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { ProductGrid } from "@/components/shop/ProductGrid";
-import { searchProducts } from "@/data/products";
+import { searchProducts } from "@/lib/api/catalog";
 
 export const metadata: Metadata = {
   title: "Search Results",
@@ -13,7 +13,7 @@ export default async function SearchPage({
   searchParams: Promise<{ q?: string }>;
 }) {
   const { q = "" } = await searchParams;
-  const results = searchProducts(q);
+  const results = await searchProducts(q);
 
   return (
     <div className="mx-auto max-w-[1800px] px-3 py-8 sm:px-4 lg:px-6">

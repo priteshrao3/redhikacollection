@@ -10,18 +10,30 @@ import { ContactCTA } from "@/components/shop/ContactCTA";
 import { Testimonials } from "@/components/shop/Testimonials";
 import { Reveal } from "@/components/shop/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { getBestSellers, getLatestProducts, getProductsByCategory } from "@/data/products";
-import { CATEGORIES, categoryToSlug } from "@/lib/categories";
+import { getBestSellers, getLatestProducts, getProductsByCategory, listCategories } from "@/lib/api/catalog";
+import { getSiteSettings, listContactCards, listOccasionTiles, listStats, listTrustBadges } from "@/lib/api/content";
+import { heroImageUrl } from "@/data/images";
 
-export default function HomePage() {
-  const latest = getLatestProducts(8);
-  const bestSellers = getBestSellers(8);
-  const sarees = getProductsByCategory("sarees").slice(0, 8);
+export default async function HomePage() {
+  const [latest, bestSellers, sareesFull, categories, settings, occasionTiles, trustBadges, stats, contactCards] =
+    await Promise.all([
+      getLatestProducts(8),
+      getBestSellers(8),
+      getProductsByCategory("sarees"),
+      listCategories(),
+      getSiteSettings(),
+      listOccasionTiles(),
+      listTrustBadges(),
+      listStats(),
+      listContactCards(),
+    ]);
+  const sarees = sareesFull.slice(0, 8);
+  const categoryTileProducts = await Promise.all(categories.map((c) => getProductsByCategory(c.slug)));
 
   return (
     <>
-      <HeroBanner />
-      <TrustBadgeStrip />
+      <HeroBanner settings={settings} />
+      <TrustBadgeStrip badges={trustBadges} />
 
       <Reveal>
         <ProductRail
@@ -33,7 +45,7 @@ export default function HomePage() {
       </Reveal>
 
       <Reveal>
-        <OccasionGrid />
+        <OccasionGrid tiles={occasionTiles} />
       </Reveal>
 
       <Reveal>
@@ -49,9 +61,10 @@ export default function HomePage() {
         <section className="mx-auto max-w-[1800px] px-3 py-14 sm:px-4 lg:px-6">
           <SectionHeading eyebrow="Handpicked For You" title="Shop by Category" />
           <div className="mt-10 flex flex-wrap justify-center gap-8 sm:gap-12">
-            {CATEGORIES.map((category) => {
-              const [first] = getProductsByCategory(categoryToSlug(category));
-              return <CategoryTile key={category} category={category} image={first?.images[0] ?? ""} />;
+            {categories.map((category, i) => {
+              const [first] = categoryTileProducts[i];
+              const image = first?.images[0] ?? heroImageUrl(400);
+              return <CategoryTile key={category.slug} category={category.name} image={image} />;
             })}
           </div>
         </section>
@@ -67,14 +80,14 @@ export default function HomePage() {
       </Reveal>
 
       <Reveal>
-        <PromoBanner />
+        <PromoBanner settings={settings} />
       </Reveal>
       <Reveal>
-        <BrandStory />
+        <BrandStory settings={settings} />
       </Reveal>
-      <StatsStrip />
+      <StatsStrip stats={stats} />
       <Reveal>
-        <ContactCTA />
+        <ContactCTA cards={contactCards} />
       </Reveal>
       <Reveal>
         <Testimonials />

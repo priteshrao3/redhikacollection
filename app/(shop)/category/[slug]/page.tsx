@@ -2,9 +2,8 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { CategoryBrowser } from "@/components/shop/CategoryBrowser";
-import { getProductsByCategory } from "@/data/products";
+import { getProductsByCategory } from "@/lib/api/catalog";
 import { CATEGORY_SLUGS, slugToCategory } from "@/lib/categories";
-import type { CategorySlug } from "@/types/product";
 
 export function generateStaticParams() {
   return Object.values(CATEGORY_SLUGS).map((slug) => ({ slug }));
@@ -33,7 +32,7 @@ export default async function CategoryPage({
   const category = slugToCategory(slug);
   if (!category) notFound();
 
-  const products = getProductsByCategory(slug as CategorySlug);
+  const products = await getProductsByCategory(slug);
   const label = category === "Ready-made Dress" ? "Ready-made Dresses" : `${category}s`;
 
   return (

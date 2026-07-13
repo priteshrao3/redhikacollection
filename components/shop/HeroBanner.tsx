@@ -1,13 +1,14 @@
 import Image from "next/image";
 import { Star } from "lucide-react";
-import { heroImageUrl } from "@/data/images";
 import { Button } from "@/components/ui/Button";
+import type { SiteSettings } from "@/types/content";
+import { heroImageUrl } from "@/data/images";
 
-export function HeroBanner() {
+export function HeroBanner({ settings }: { settings: SiteSettings }) {
   return (
     <section className="relative flex min-h-140 items-center overflow-hidden bg-navy-900 sm:min-h-160">
       <Image
-        src={heroImageUrl()}
+        src={settings.heroImageUrl || heroImageUrl()}
         alt="Wedding collection — ethnic wear model"
         fill
         priority
@@ -18,28 +19,28 @@ export function HeroBanner() {
 
       <div className="relative mx-auto w-full max-w-[1800px] px-3 sm:px-4 lg:px-6">
         <span className="animate-fade-up inline-flex items-center gap-2 rounded-full border border-gold-400/40 bg-white/5 px-4 py-1.5 font-display text-xs uppercase tracking-[0.3em] text-gold-400">
-          New Collection
+          {settings.heroBadgeText}
         </span>
         <h1
           className="animate-fade-up mt-5 font-display text-5xl leading-[1.05] text-white sm:text-6xl"
           style={{ animationDelay: "0.1s" }}
         >
-          Wedding Collection
+          {settings.heroHeadingLine1}
           <br />
-          <span className="italic text-gold-300">Elegance in Every Thread</span>
+          <span className="italic text-gold-300">{settings.heroHeadingLine2}</span>
         </h1>
         <p
           className="animate-fade-up mt-5 text-lg font-medium tracking-wide text-gold-200"
           style={{ animationDelay: "0.2s" }}
         >
-          Up to 50% Off
+          {settings.heroSubheading}
         </p>
         <div className="animate-fade-up mt-8 flex flex-wrap gap-4" style={{ animationDelay: "0.3s" }}>
-          <Button href="/category/lehengas" size="lg">
-            Shop Now
+          <Button href={settings.heroCtaPrimaryHref} size="lg">
+            {settings.heroCtaPrimaryLabel}
           </Button>
-          <Button href="/category/sarees" variant="outline" size="lg">
-            Explore Sarees
+          <Button href={settings.heroCtaSecondaryHref} variant="outline" size="lg">
+            {settings.heroCtaSecondaryLabel}
           </Button>
         </div>
         <div
@@ -51,7 +52,9 @@ export function HeroBanner() {
               <Star key={i} size={14} className="fill-gold-300 text-gold-300" />
             ))}
           </span>
-          <span>4.9/5 · Loved by 250k+ customers</span>
+          <span>
+            {settings.heroRatingValue}/5 · Loved by {settings.heroRatingCount} customers
+          </span>
         </div>
       </div>
     </section>

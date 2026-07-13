@@ -1,5 +1,5 @@
 import { Quote } from "lucide-react";
-import { getMockReviews } from "@/lib/mock-reviews";
+import { listReviews } from "@/lib/api/catalog";
 import { StarRating } from "@/components/ui/StarRating";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
@@ -14,8 +14,9 @@ function initials(name: string) {
     .toUpperCase();
 }
 
-export function Testimonials() {
-  const reviews = FEATURED_PRODUCT_IDS.map((id) => getMockReviews(id, 1)[0]);
+export async function Testimonials() {
+  const reviewLists = await Promise.all(FEATURED_PRODUCT_IDS.map((id) => listReviews(id)));
+  const reviews = reviewLists.map((list) => list[0]).filter((review) => review !== undefined);
 
   return (
     <section className="mx-auto max-w-[1800px] px-3 py-14 sm:px-4 lg:px-6">

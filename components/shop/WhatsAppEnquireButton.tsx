@@ -3,8 +3,9 @@
 import { MessageCircle } from "lucide-react";
 import type { Product } from "@/types/product";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
-import { trackEvent } from "@/lib/tracking";
+import { trackEvent } from "@/lib/api/analytics";
 import { cn } from "@/lib/cn";
+import { useSiteSettings } from "@/context/SiteSettingsContext";
 
 export function WhatsAppEnquireButton({
   product,
@@ -15,8 +16,9 @@ export function WhatsAppEnquireButton({
   size?: "sm" | "lg";
   className?: string;
 }) {
+  const settings = useSiteSettings();
   const message = `Hi, I'm interested in "${product.name}". Could you please share the price and availability?`;
-  const href = buildWhatsAppLink(message);
+  const href = buildWhatsAppLink(settings.whatsappNumber, message);
 
   return (
     <button

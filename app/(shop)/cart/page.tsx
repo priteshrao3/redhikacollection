@@ -1,15 +1,16 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ShoppingBag } from "lucide-react";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { CartLineItem } from "@/components/shop/CartLineItem";
 import { OrderSummary } from "@/components/shop/OrderSummary";
 import { useCart } from "@/context/CartContext";
-import { showToast } from "@/components/shop/Toast";
 
 export default function CartPage() {
   const { items, subtotal, itemCount } = useCart();
+  const router = useRouter();
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
@@ -44,9 +45,7 @@ export default function CartPage() {
           <OrderSummary
             subtotal={subtotal}
             itemCount={itemCount}
-            onCheckout={() =>
-              showToast("Checkout is not available in this prototype yet.")
-            }
+            onCheckout={() => router.push("/checkout")}
           />
         </div>
       )}

@@ -1,8 +1,10 @@
-import { getMockReviews } from "@/lib/mock-reviews";
+import type { Review } from "@/lib/api/catalog";
 import { StarRating } from "@/components/ui/StarRating";
 
-export function ProductReviews({ productId }: { productId: string }) {
-  const reviews = getMockReviews(productId);
+export function ProductReviews({ reviews }: { reviews: Review[] }) {
+  if (reviews.length === 0) {
+    return <p className="text-sm text-neutral-500">No reviews yet.</p>;
+  }
 
   return (
     <div className="space-y-5">

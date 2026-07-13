@@ -42,13 +42,33 @@
   --color-navy-800: #1c293f;
   --color-navy-700: #2b3b56;
   --color-navy-600: #445171;
+  --color-navy-500: #5f6d8c;
+  --color-navy-400: #8290ab;
+  --color-navy-300: #a9b5cb;
+  --color-navy-200: #cdd5e3;
   --color-navy-100: #e7ebf3;
+  --color-navy-50: #f5f7fb;
 
-  /* Semantic */
+  /* Semantic -- full ramps so admin badges/alerts can use tints beyond /10 opacity */
+  --color-success-50: #f0fdf4;
+  --color-success-100: #dcfce7;
   --color-success-500: #16a34a;
+  --color-success-600: #15803d;
+
+  --color-warning-50: #fffbeb;
+  --color-warning-100: #fef3c7;
   --color-warning-500: #d97706;
+  --color-warning-600: #b45309;
+
+  --color-danger-50: #fef2f2;
+  --color-danger-100: #fee2e2;
   --color-danger-500: #dc2626;
+  --color-danger-600: #b91c1c;
+
+  --color-info-50: #eff6ff;
+  --color-info-100: #dbeafe;
   --color-info-500: #2563eb;
+  --color-info-600: #1d4ed8;
 }
 
 html {

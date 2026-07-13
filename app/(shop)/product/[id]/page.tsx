@@ -10,12 +10,8 @@ import { ProductReviews } from "@/components/shop/ProductReviews";
 import { ProductViewTracker } from "@/components/shop/ProductViewTracker";
 import { ProductGrid } from "@/components/shop/ProductGrid";
 import { Tabs } from "@/components/ui/Tabs";
-import { PRODUCTS, getProductById, getRelatedProducts } from "@/data/products";
+import { getProductById, getRelatedProducts, listReviews } from "@/lib/api/catalog";
 import { categoryToSlug } from "@/lib/categories";
-
-export function generateStaticParams() {
-  return PRODUCTS.map((p) => ({ id: p.id }));
-}
 
 export async function generateMetadata({
   params,
@@ -23,7 +19,7 @@ export async function generateMetadata({
   params: Promise<{ id: string }>;
 }): Promise<Metadata> {
   const { id } = await params;
-  const product = getProductById(id);
+  const product = await getProductById(id);
   if (!product) return {};
   return {
     title: product.name,
@@ -38,10 +34,13 @@ export default async function ProductPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const product = getProductById(id);
+  const product = await getProductById(id);
   if (!product) notFound();
 
-  const related = getRelatedProducts(product);
+  const [related, reviews] = await Promise.all([
+    getRelatedProducts(product),
+    listReviews(product.id),
+  ]);
   const label = product.category === "Ready-made Dress" ? "Ready-made Dresses" : `${product.category}s`;
 
   return (
@@ -101,7 +100,7 @@ export default async function ProductPage({
                 </ul>
               ),
             },
-            { id: "reviews", label: `Reviews (${product.reviewCount})`, content: <ProductReviews productId={product.id} /> },
+            { id: "reviews", label: `Reviews (${product.reviewCount})`, content: <ProductReviews reviews={reviews} /> },
             {
               id: "shipping",
               label: "Shipping",

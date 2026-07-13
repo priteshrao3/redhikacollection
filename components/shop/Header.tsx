@@ -3,10 +3,11 @@
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Heart, Menu, Search, User, X } from "lucide-react";
+import { Heart, LogOut, Menu, Search, User, X } from "lucide-react";
 import { CartBadge } from "@/components/shop/CartBadge";
 import { CATEGORIES } from "@/lib/categories";
 import { categoryToSlug } from "@/lib/categories";
+import type { ApiUser } from "@/lib/api/auth";
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
@@ -19,7 +20,7 @@ const OFFERS = [
   "Easy 7-Day Returns | COD Not Available",
 ];
 
-export function Header() {
+export function Header({ user }: { user: ApiUser | null }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [query, setQuery] = useState("");
   const router = useRouter();
@@ -30,6 +31,12 @@ export function Header() {
     if (!q) return;
     router.push(`/search?q=${encodeURIComponent(q)}`);
     setMobileOpen(false);
+  }
+
+  async function handleLogout() {
+    await fetch("/api/auth/logout", { method: "POST" });
+    router.push("/");
+    router.refresh();
   }
 
   return (
@@ -93,13 +100,33 @@ export function Header() {
           >
             <Heart size={20} />
           </button>
-          <button
-            type="button"
-            aria-label="Account"
-            className="hidden h-9 w-9 items-center justify-center rounded-full text-navy-900 hover:bg-maroon-50 sm:flex"
-          >
-            <User size={20} />
-          </button>
+          {user ? (
+            <div className="hidden items-center gap-1 sm:flex">
+              <Link
+                href="/account"
+                aria-label="My Account"
+                className="flex h-9 w-9 items-center justify-center rounded-full text-navy-900 hover:bg-maroon-50"
+              >
+                <User size={20} />
+              </Link>
+              <button
+                type="button"
+                aria-label="Logout"
+                onClick={handleLogout}
+                className="flex h-9 w-9 items-center justify-center rounded-full text-navy-900 hover:bg-maroon-50"
+              >
+                <LogOut size={18} />
+              </button>
+            </div>
+          ) : (
+            <Link
+              href="/login"
+              aria-label="Login"
+              className="hidden h-9 w-9 items-center justify-center rounded-full text-navy-900 hover:bg-maroon-50 sm:flex"
+            >
+              <User size={20} />
+            </Link>
+          )}
           <CartBadge />
         </div>
       </div>
@@ -131,6 +158,37 @@ export function Header() {
               {link.label}
             </Link>
           ))}
+          <div className="mt-1 border-t border-neutral-200 pt-2">
+            {user ? (
+              <>
+                <Link
+                  href="/account"
+                  onClick={() => setMobileOpen(false)}
+                  className="block rounded-md px-2 py-2 text-sm font-medium text-navy-800 hover:bg-maroon-50"
+                >
+                  My Account
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMobileOpen(false);
+                    handleLogout();
+                  }}
+                  className="block w-full rounded-md px-2 py-2 text-left text-sm font-medium text-navy-800 hover:bg-maroon-50"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <Link
+                href="/login"
+                onClick={() => setMobileOpen(false)}
+                className="block rounded-md px-2 py-2 text-sm font-medium text-navy-800 hover:bg-maroon-50"
+              >
+                Login
+              </Link>
+            )}
+          </div>
         </nav>
       )}
     </header>

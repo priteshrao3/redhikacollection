@@ -3,7 +3,7 @@
 import { ShoppingBag } from "lucide-react";
 import type { Product } from "@/types/product";
 import { useCart } from "@/context/CartContext";
-import { trackEvent } from "@/lib/tracking";
+import { trackEvent } from "@/lib/api/analytics";
 import { showToast } from "@/components/shop/Toast";
 import { cn } from "@/lib/cn";
 

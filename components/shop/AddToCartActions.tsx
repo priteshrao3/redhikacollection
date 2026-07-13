@@ -7,7 +7,7 @@ import type { Product } from "@/types/product";
 import { ColorSizeSelector } from "@/components/shop/ColorSizeSelector";
 import { QtyStepper } from "@/components/ui/QtyStepper";
 import { useCart } from "@/context/CartContext";
-import { trackEvent } from "@/lib/tracking";
+import { trackEvent } from "@/lib/api/analytics";
 import { showToast } from "@/components/shop/Toast";
 
 export function AddToCartActions({ product }: { product: Product }) {

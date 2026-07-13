@@ -60,17 +60,6 @@ export function Footer({
         <div>
           <h4 className="mb-3 text-sm font-semibold text-white">Contact</h4>
           <ul className="space-y-2 text-sm">
-<<<<<<< HEAD
-            <li>aleemmalik7786@gmail.com</li>
-            <li>+91-6398523316</li>
-            <li>Mon-Sat, 10am - 7pm IST</li>
-          </ul>
-        </div>
-      </div>
-      {/* <div className="border-t border-white/10 px-4 py-4 text-center text-xs text-neutral-500">
-        © {new Date().getFullYear()} Shibrah Collection. All rights reserved. (Prototype — demo data only)
-      </div> */}
-=======
             <li>{settings.contactEmail}</li>
             <li>{settings.contactPhone}</li>
             <li>{settings.businessHours}</li>
@@ -80,7 +69,6 @@ export function Footer({
       <div className="border-t border-white/10 px-4 py-4 text-center text-xs text-neutral-500">
         © {new Date().getFullYear()} Shibrah Collection. All rights reserved.
       </div>
->>>>>>> e847f0d (app updated)
     </footer>
   );
 }

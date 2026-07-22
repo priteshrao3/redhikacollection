@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import type { SiteSettings } from "@/types/content";
 import { Input, Textarea } from "@/components/ui/Field";
 import { Tabs } from "@/components/ui/Tabs";
+import { SingleImageUpload } from "@/components/admin/SingleImageUpload";
 import { updateSiteSettingsAction } from "@/app/(admin)/admin/(dashboard)/content/actions";
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
@@ -74,7 +75,7 @@ export function SiteSettingsForm({ initial }: { initial: SiteSettings }) {
             label: "Hero Banner",
             content: (
               <Section title="Hero Banner">
-                <Input label="Image URL" value={s.heroImageUrl} onChange={(e) => set("heroImageUrl", e.target.value)} />
+                <SingleImageUpload label="Image" value={s.heroImageUrl} onChange={(url) => set("heroImageUrl", url)} />
                 <Input label="Badge Text" value={s.heroBadgeText} onChange={(e) => set("heroBadgeText", e.target.value)} />
                 <Input label="Heading Line 1" value={s.heroHeadingLine1} onChange={(e) => set("heroHeadingLine1", e.target.value)} />
                 <Input label="Heading Line 2" value={s.heroHeadingLine2} onChange={(e) => set("heroHeadingLine2", e.target.value)} />
@@ -94,7 +95,7 @@ export function SiteSettingsForm({ initial }: { initial: SiteSettings }) {
             content: (
               <div className="space-y-4">
                 <Section title="Promo Banner">
-                  <Input label="Image URL" value={s.promoImageUrl} onChange={(e) => set("promoImageUrl", e.target.value)} />
+                  <SingleImageUpload label="Image" value={s.promoImageUrl} onChange={(url) => set("promoImageUrl", url)} />
                   <Input label="Eyebrow" value={s.promoEyebrow} onChange={(e) => set("promoEyebrow", e.target.value)} />
                   <Input label="Heading" value={s.promoHeading} onChange={(e) => set("promoHeading", e.target.value)} />
                   <Input label="Offer Text" value={s.promoOfferText} onChange={(e) => set("promoOfferText", e.target.value)} />
@@ -102,7 +103,7 @@ export function SiteSettingsForm({ initial }: { initial: SiteSettings }) {
                   <Input label="CTA Href" value={s.promoCtaHref} onChange={(e) => set("promoCtaHref", e.target.value)} />
                 </Section>
                 <Section title="Brand Story">
-                  <Input label="Image URL" value={s.brandStoryImageUrl} onChange={(e) => set("brandStoryImageUrl", e.target.value)} />
+                  <SingleImageUpload label="Image" value={s.brandStoryImageUrl} onChange={(url) => set("brandStoryImageUrl", url)} />
                   <Input label="Eyebrow" value={s.brandStoryEyebrow} onChange={(e) => set("brandStoryEyebrow", e.target.value)} />
                   <Input label="Title" value={s.brandStoryTitle} onChange={(e) => set("brandStoryTitle", e.target.value)} />
                   <Input label="CTA Label" value={s.brandStoryCtaLabel} onChange={(e) => set("brandStoryCtaLabel", e.target.value)} />

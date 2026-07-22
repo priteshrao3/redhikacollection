@@ -84,7 +84,7 @@ export default async function AdminContentPage() {
             { key: "label", label: "Label", type: "text" },
             { key: "category", label: "Category", type: "select", options: CATEGORY_OPTIONS },
             { key: "slug", label: "Category Slug", type: "text", placeholder: "e.g. sarees" },
-            { key: "image_url", label: "Image URL", type: "url" },
+            { key: "image_url", label: "Image", type: "image" },
           ]}
           onCreate={createOccasionTileAction}
           onUpdate={updateOccasionTileAction}

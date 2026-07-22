@@ -1,11 +1,13 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
-import { ChevronDown, Plus, Trash2 } from "lucide-react";
+import Image from "next/image";
+import { ChevronDown, ImagePlus, Loader2, Plus, Trash2 } from "lucide-react";
 import { showToast } from "@/components/shop/Toast";
+import { uploadMediaAction } from "@/app/(admin)/admin/(dashboard)/media-actions";
 
-type FieldType = "text" | "number" | "select" | "url";
+type FieldType = "text" | "number" | "select" | "url" | "image";
 
 export interface FieldDef {
   key: string;
@@ -44,6 +46,9 @@ function FieldInput({
       </div>
     );
   }
+  if (field.type === "image") {
+    return <CompactImageUpload value={String(value)} onChange={onChange} />;
+  }
   return (
     <input
       type={field.type === "number" ? "number" : "text"}
@@ -52,6 +57,54 @@ function FieldInput({
       placeholder={field.placeholder}
       className={FIELD_CLASS}
     />
+  );
+}
+
+function CompactImageUpload({ value, onChange }: { value: string; onChange: (v: string) => void }) {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [uploading, setUploading] = useState(false);
+
+  async function handleFile(file: File | undefined) {
+    if (!file) return;
+    setUploading(true);
+    const formData = new FormData();
+    formData.append("file", file);
+    const result = await uploadMediaAction(formData);
+    setUploading(false);
+    if (!result.ok) {
+      showToast(result.error);
+      return;
+    }
+    onChange(result.urls[0]);
+  }
+
+  return (
+    <>
+      <div
+        onClick={() => inputRef.current?.click()}
+        role="button"
+        tabIndex={0}
+        className="relative flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center overflow-hidden rounded-lg border border-dashed border-neutral-300 bg-white text-neutral-400 transition-colors hover:border-maroon-400 hover:text-maroon-500"
+      >
+        {uploading ? (
+          <Loader2 size={14} className="animate-spin" />
+        ) : value ? (
+          <Image src={value} alt="" fill sizes="36px" className="object-cover" />
+        ) : (
+          <ImagePlus size={14} />
+        )}
+      </div>
+      <input
+        ref={inputRef}
+        type="file"
+        accept="image/jpeg,image/png,image/webp,image/gif"
+        hidden
+        onChange={(e) => {
+          handleFile(e.target.files?.[0]);
+          e.target.value = "";
+        }}
+      />
+    </>
   );
 }
 

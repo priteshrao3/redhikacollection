@@ -7,6 +7,7 @@ import {
   LayoutTemplate,
   ListTree,
   LogOut,
+  MessageCircle,
   Package,
   ShoppingCart,
   Sparkles,
@@ -41,6 +42,7 @@ const NAV_GROUPS = [
   {
     label: "Engagement",
     items: [
+      { label: "Enquiries", href: "/admin/enquiries", icon: MessageCircle },
       { label: "Reviews", href: "/admin/reviews", icon: Star },
       { label: "Content", href: "/admin/content", icon: LayoutTemplate },
       { label: "Analytics", href: "/admin/analytics", icon: TrendingUp },

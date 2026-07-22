@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Pencil, Search, Trash2 } from "lucide-react";
+import { ImageOff, Pencil, Search, Trash2 } from "lucide-react";
 import type { Product } from "@/types/product";
 import { formatPrice, getStockStatus } from "@/lib/format";
 import { cn } from "@/lib/cn";
@@ -89,8 +89,12 @@ export function ProductsTable({ products }: { products: Product[] }) {
               <Tr key={product.id} className="transition-colors hover:bg-maroon-50/30">
                 <Td>
                   <div className="flex items-center gap-3">
-                    <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-lg border border-neutral-100 bg-neutral-100">
-                      <Image src={product.images[0]} alt={product.name} fill sizes="40px" className="object-cover" />
+                    <div className="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-neutral-100 bg-neutral-100">
+                      {product.images[0] ? (
+                        <Image src={product.images[0]} alt={product.name} fill sizes="40px" className="object-cover" />
+                      ) : (
+                        <ImageOff size={16} className="text-neutral-300" />
+                      )}
                     </div>
                     <span className="max-w-[220px] truncate font-medium text-navy-900">{product.name}</span>
                   </div>

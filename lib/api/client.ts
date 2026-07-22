@@ -27,11 +27,12 @@ export async function apiFetch<T>(path: string, options: ApiFetchOptions = {}): 
   }
 
   const { authToken, headers, ...rest } = options;
+  const isFormData = typeof FormData !== "undefined" && rest.body instanceof FormData;
 
   const response = await fetch(`${API_URL}${path}`, {
     ...rest,
     headers: {
-      "Content-Type": "application/json",
+      ...(isFormData ? {} : { "Content-Type": "application/json" }),
       ...(authToken ? { Authorization: `Bearer ${authToken}` } : {}),
       ...headers,
     },

@@ -162,7 +162,6 @@ export async function createReview(
 }
 
 export interface ProductInput {
-  id: string;
   categorySlug: string;
   name: string;
   price: number;
@@ -174,12 +173,12 @@ export interface ProductInput {
   highlights: string[];
   stock: number;
   isBestSeller: boolean;
-  imageUrls: string[];
+  /** Optional secondary path — pasted external URLs, alongside real uploads via uploadProductImages(). */
+  imageUrls?: string[];
 }
 
 function toWirePayload(input: ProductInput) {
   return {
-    id: input.id,
     category: input.categorySlug,
     name: input.name,
     price: input.price,
@@ -191,7 +190,7 @@ function toWirePayload(input: ProductInput) {
     highlights: input.highlights,
     stock: input.stock,
     is_best_seller: input.isBestSeller,
-    image_urls: input.imageUrls,
+    ...(input.imageUrls ? { image_urls: input.imageUrls } : {}),
   };
 }
 
